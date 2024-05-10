@@ -1,0 +1,50 @@
+import bs4
+import requests
+import pandas as pd
+req=requests.get('https://www.flipkart.com/motorola-g34-5g-ocean-green-128-gb/product-reviews/itm6b1a33b9d9191?pid=MOBGUFK4TZ2CJYHJ&lid=LSTMOBGUFK4TZ2CJYHJPBUF6M&marketplace=FLIPKART&page=1')
+
+print(req)
+
+soup=bs4.BeautifulSoup(req.text)
+
+customers_list=soup.find_all('p', class_="_2NsDsF AwS1CA")
+customers=[]
+for cust in customers_list:
+    customers.append(cust.text)
+
+customers
+
+rating_list=soup.find_all('div', class_="XQDdHH Ga3i8K")
+ratings=[]
+for rating in rating_list:
+    ratings.append(rating.text)
+
+ratings
+
+titles_list=soup.find_all('p', class_="z9E0IG")
+titles=[]
+for title in titles_list:
+    titles.append(cust.text)
+
+titles
+
+bodyDiv=soup.find_all('div', class_='ZmyHeo')
+reviews=[]
+for div in bodyDiv:
+    div1=div.find('div')
+    div2=div1.find('div')
+    reviews.append(div2.text)
+
+reviews
+
+
+len(reviews)
+
+df=pd.DataFrame()
+df['Customer Name']=customers
+df['Rating']=ratings
+df['Review Title']=titles
+df['Review']=reviews
+
+df.to_csv('reviews.csv',index=True)
+
