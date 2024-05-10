@@ -1,0 +1,17 @@
+df = pd.read_csv('heart.csv')
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.heatmap(df.corr(),cmap = 'YlGnBu', annot = True)
+sns.lineplot(data=df,x=df.age,y=df.cp,hue='output')
+
+sns.lineplot(df,x=df.oldpeak,y=df.exng,hue='output')
+sns.histplot(data=df, x=df.output,hue=df.sex)
+sns.histplot(data=df,x=df['age'], hue='output')
+
+temp_df = df[['age','cp', 'trtbps','chol','fbs','oldpeak','output']]
+plt.figure(figsize=(15,10))
+sns.pairplot(temp_df,hue="output")
+plt.title("Looking for Insites in Data")
+plt.legend("HeartDisease")
+plt.tight_layout()
+plt.plot()

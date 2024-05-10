@@ -1,0 +1,10 @@
+df = pd.read_csv('adult_dataset.csv')
+
+df.describe()
+df_subset_1 = df[['workclass','education','capital-gain']]
+df_subset_2 = df[['race','native-country']]
+merged_data  = pd.concat([df_subset_1,df_subset_2],axis=1)
+merged_data.sort_values(by=['capital-gain'],ascending=False)
+merged_data.transpose()
+pd.melt(df, id_vars =['education'], value_vars =['capital-gain'])
+

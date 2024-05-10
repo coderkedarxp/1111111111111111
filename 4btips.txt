@@ -1,0 +1,20 @@
+df = pd.read_csv('tips_DV.csv')
+df.rename(columns = {'size':'peoples'}, inplace = True)
+col_var = df[['peoples','sex', 'smoker', 'day', 'time']]
+
+for i in col_var:
+    print(i, df[i].unique())
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+
+sns.lineplot(df,x='total_bill',y='tip')
+sns.lineplot(df,x='peoples',y='tip')
+sns.boxplot(df,x='day',y='total_bill')
+sns.boxplot(df,x='day',y='total_bill',hue='sex')
+sns.histplot(df,x='total_bill',hue='time')
+sns.histplot(df,x='tip',hue='smoker')
+sns.scatterplot(df,x='total_bill',y='tip',hue='time')
+sns.violinplot(df,x ='day', y ='tip')
+sns.violinplot(df,x ='time', y ='tip',hue='day')
